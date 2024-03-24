@@ -29,16 +29,23 @@ type Todo = {
   
   type TodoStore = {
     todos: Todo[];
-    addTodo: (text: string) => void;
+    currentTodo: string;
+    addTodo: () => void;
     removeTodo: (index: number) => void;
     toggleTodo: (index: number) => void;
+    setCurrentTodo: (value: string) => void;
   };
   
   export const useTodoStore = create<TodoStore>((set) => ({
     todos: [],
-    addTodo: (text) => set((state) => ({ todos: [...state.todos, { text, completed: false }] })),
+    currentTodo: '',
+    addTodo: () => set((state) => {
+      const newTodo = { text: state.currentTodo, completed: false };
+      return { todos: [...state.todos, newTodo], currentTodo: '' };
+    }),
     removeTodo: (index) => set((state) => ({ todos: state.todos.filter((_, i) => i !== index) })),
     toggleTodo: (index) => set((state) => ({
       todos: state.todos.map((todo, i) => i === index ? { ...todo, completed: !todo.completed } : todo)
     })),
+    setCurrentTodo: (value) => set(() => ({ currentTodo: value })),
   }));
