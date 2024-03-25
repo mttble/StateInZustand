@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
 import { useTodoStore } from './store';
 
 const TodoPage = () => {
-  const [text, setText] = useState('');
-  const { todos, addTodo, removeTodo, toggleTodo } = useTodoStore();
+  const { todos, addTodo, removeTodo, toggleTodo, currentTodo, setCurrentTodo } = useTodoStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(text);
-    setText('');
+    addTodo();
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input value={text} onChange={(e) => setText(e.target.value)} />
+        <input value={currentTodo} onChange={(e) => setCurrentTodo(e.target.value)} />
         <button type="submit">Add Todo</button>
       </form>
       <ul>

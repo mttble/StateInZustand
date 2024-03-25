@@ -1,4 +1,5 @@
 import './App.css'
+import TodoPage from './TodoPage'
 import { useCounterStore } from './store'
 
 const App = () => {
@@ -21,7 +22,9 @@ const OtherComponent = ({ count }: { count: number }) => {
         <button onClick={incrementAsync}>Increment Async</button>
         </div>
       </div>
+      <TodoPage />
     </div> 
+  
   )
 }
 
